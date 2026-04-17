@@ -1,8 +1,3 @@
-"""
-Advanced Ad Script Generation Workflow
-Features: Batch processing, queue management, performance analytics, and multiple output formats
-"""
-
 import json
 import os
 from datetime import datetime
@@ -72,27 +67,27 @@ class AdvancedAdWorkflow:
             Dictionary mapping topics to their generated scripts
         """
         print("\n" + "="*80)
-        print("🚀 BATCH PROCESSING STARTED".center(80))
+        print(" BATCH PROCESSING STARTED".center(80))
         print("="*80)
         
         self.analytics["start_time"] = datetime.now()
         batch_results = {}
         
         for topic in topics:
-            print(f"\n📌 Processing topic: {topic}")
+            print(f"\n Processing topic: {topic}")
             try:
                 scripts = self.generator.create_workflow(topic, num_scripts=scripts_per_topic)
                 batch_results[topic] = scripts
                 self.analytics["total_generated"] += len(scripts)
                 self.scripts_queue.extend(scripts)
             except Exception as e:
-                print(f"❌ Error processing {topic}: {e}")
+                print(f" Error processing {topic}: {e}")
                 self.analytics["total_errors"] += 1
         
         self.analytics["end_time"] = datetime.now()
         
         print("\n" + "="*80)
-        print("✅ BATCH PROCESSING COMPLETED".center(80))
+        print(" BATCH PROCESSING COMPLETED".center(80))
         print("="*80)
         
         return batch_results
@@ -151,7 +146,7 @@ class AdvancedAdWorkflow:
                 row = {field: script.get(field, '') for field in fieldnames}
                 writer.writerow(row)
         
-        print(f"✓ CSV exported: {filepath}")
+        print(f" CSV exported: {filepath}")
         return filepath
     
     def export_to_markdown(self, scripts: List[Dict], filename: Optional[str] = None) -> str:
@@ -200,7 +195,7 @@ class AdvancedAdWorkflow:
                 f.write(f"**Duration:** {script.get('estimated_duration', '15-20 seconds')}\n\n")
                 f.write("---\n\n")
         
-        print(f"✓ Markdown exported: {filepath}")
+        print(f" Markdown exported: {filepath}")
         return filepath
     
     def export_to_html(self, scripts: List[Dict], filename: Optional[str] = None) -> str:
@@ -388,7 +383,7 @@ class AdvancedAdWorkflow:
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎬 Generated Ad Scripts</h1>
+            <h1> Generated Ad Scripts</h1>
             <p>High-Converting Instagram & Meta Ad Scripts</p>
         </div>
         
@@ -422,43 +417,43 @@ class AdvancedAdWorkflow:
                 <div class="script-number">Script #{i}</div>
                 
                 <div class="script-section">
-                    <div class="script-section-title">📌 Viral Hook</div>
+                    <div class="script-section-title"> Viral Hook</div>
                     <div class="script-content">
                         <span class="hook-highlight">{script.get('hook', 'N/A')}</span>
                     </div>
                 </div>
                 
                 <div class="script-section">
-                    <div class="script-section-title">⚠️ Problem Statement</div>
+                    <div class="script-section-title"> Problem Statement</div>
                     <div class="script-content">{script.get('problem_statement', 'N/A')}</div>
                 </div>
                 
                 <div class="script-section">
-                    <div class="script-section-title">✨ Solution</div>
+                    <div class="script-section-title"> Solution</div>
                     <div class="script-content">{script.get('solution', 'N/A')}</div>
                 </div>
                 
                 <div class="script-section">
-                    <div class="script-section-title">🎯 Call to Action</div>
+                    <div class="script-section-title"> Call to Action</div>
                     <div class="script-content">{script.get('cta', 'N/A')}</div>
                 </div>
                 
                 <div class="script-section">
-                    <div class="script-section-title">🎞️ Full Script (15-20 seconds)</div>
+                    <div class="script-section-title"> Full Script (15-20 seconds)</div>
                     <div class="script-content">{script.get('full_script', 'N/A')}</div>
                 </div>
                 
                 <div class="script-meta">
                     <div class="meta-item">
-                        <span>📱 Platform:</span>
+                        <span> Platform:</span>
                         <span class="badge">{script.get('platform', 'N/A')}</span>
                     </div>
                     <div class="meta-item">
-                        <span>⏱️ Duration:</span>
+                        <span> Duration:</span>
                         <span class="badge">{script.get('estimated_duration', '15-20 seconds')}</span>
                     </div>
                     <div class="meta-item">
-                        <span>📅 Topic:</span>
+                        <span> Topic:</span>
                         <span class="badge">{script.get('topic', 'N/A')}</span>
                     </div>
                 </div>
@@ -480,7 +475,7 @@ class AdvancedAdWorkflow:
     def print_analytics(self):
         """Print workflow analytics"""
         print("\n" + "="*80)
-        print("📊 WORKFLOW ANALYTICS".center(80))
+        print(" WORKFLOW ANALYTICS".center(80))
         print("="*80)
         print(f"Total Scripts Generated: {self.analytics['total_generated']}")
         print(f"Total Scripts Saved: {self.analytics['total_saved']}")
@@ -515,7 +510,7 @@ def main():
         all_scripts.extend(topic_scripts)
     
     # Export in multiple formats
-    print("\n💾 Exporting Results...")
+    print("\n Exporting Results...")
     workflow.export_to_json(all_scripts)
     workflow.export_to_csv(all_scripts)
     workflow.export_to_markdown(all_scripts)
@@ -524,7 +519,7 @@ def main():
     # Display analytics
     workflow.print_analytics()
     
-    print("✅ Workflow completed! Check 'ad_script_outputs' folder for results.")
+    print(" Workflow completed! Check 'ad_script_outputs' folder for results.")
 
 
 if __name__ == "__main__":
