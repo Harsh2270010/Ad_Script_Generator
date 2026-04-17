@@ -12,22 +12,22 @@ from googleapiclient.discovery import build
 load_dotenv()
 
 
-# ---------------- BOT CLASS ---------------- #
+# BOT CLASS 
 
 class OpenClawBot:
 
     def __init__(self, sheet_id):
 
-        # 🔐 API setup
+        #  API setup
         self.api_key = os.getenv("GROQ_API_KEY")
         if not self.api_key:
-            raise ValueError("❌ GROQ_API_KEY not found in .env")
+            raise ValueError(" GROQ_API_KEY not found in .env")
 
         self.model = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
 
         self.client = Groq(api_key=self.api_key)
 
-        # 📊 Google Sheets
+        #  Google Sheets
         self.sheet_id = sheet_id
         self.sheets = self.init_sheets()
 
@@ -69,12 +69,12 @@ class OpenClawBot:
                 body=body
             ).execute()
 
-            st.success("✅ Saved to Google Sheets")
+            st.success(" Saved to Google Sheets")
 
         except Exception as e:
             st.error(f"Error saving to sheets: {e}")
 
-    # ---------------- CORE LOGIC ---------------- #
+    # CORE LOGIC
 
     def get_hooks(self, topic):
 
@@ -163,7 +163,7 @@ Rules:
         return results
 
 
-# ---------------- STREAMLIT UI ---------------- #
+# STREAMLIT UI 
 
 st.set_page_config(page_title="OpenClaw AI", layout="wide")
 
@@ -172,11 +172,11 @@ st.title("🦾 OpenClaw AI Ad Generator")
 st.markdown("Generate viral ad scripts and save them directly to Google Sheets 🚀")
 
 # Inputs
-sheet_id = st.text_input("📊 Google Sheet ID")
-topic = st.text_input("🧠 Topic (e.g. Skincare)")
-num = st.slider("📈 Number of Scripts", 1, 10, 3)
+sheet_id = st.text_input(" Google Sheet ID")
+topic = st.text_input(" Topic (e.g. Skincare)")
+num = st.slider(" Number of Scripts", 1, 10, 3)
 
-use_custom = st.checkbox("✍️ Use Custom Hooks")
+use_custom = st.checkbox(" Use Custom Hooks")
 
 custom_hooks = None
 if use_custom:
@@ -187,7 +187,7 @@ if use_custom:
             custom_hooks.append(hook)
 
 # Button
-if st.button("🚀 Generate"):
+if st.button(" Generate"):
 
     if not sheet_id:
         st.error("Please enter Google Sheet ID")
@@ -201,7 +201,7 @@ if st.button("🚀 Generate"):
             results = bot.run(topic, num, custom_hooks)
             bot.save_to_sheets(results)
 
-        st.success("✅ Done!")
+        st.success(" Done!")
 
         for r in results:
             st.markdown(f"### 🔥 Hook: {r['hook']}")
