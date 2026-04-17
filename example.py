@@ -1,8 +1,3 @@
-"""
-Simple Example Usage of Ad Script Generator
-Shows how to use the main features with minimal setup
-"""
-
 def example_basic_usage():
     """Example 1: Basic usage - generate scripts for one topic"""
     print("=" * 80)
@@ -15,14 +10,14 @@ def example_basic_usage():
     generator = AdScriptGenerator()
     
     # Step 1: Get viral hooks for skincare
-    print("\n📊 Fetching viral hooks for Skincare topic...")
+    print("\n Fetching viral hooks for Skincare topic...")
     hooks_data = generator.get_viral_hooks("Skincare")
     print(f"Found {len(hooks_data['hooks'])} trending hooks:")
     for i, hook in enumerate(hooks_data['hooks'], 1):
         print(f"  {i}. {hook['hook']} (Platform: {hook['platform']})")
     
     # Step 2: Generate ad scripts
-    print("\n🤖 Generating ad scripts...")
+    print("\n Generating ad scripts...")
     scripts = generator.create_workflow("Skincare", num_scripts=3)
     
     # Step 3: Display results
@@ -63,7 +58,7 @@ def example_batch_processing():
         all_scripts.extend(topic_scripts)
     
     # Export to multiple formats
-    print("\n💾 Exporting to multiple formats...")
+    print("\n Exporting to multiple formats...")
     workflow.export_to_json(all_scripts, "example_batch.json")
     workflow.export_to_csv(all_scripts, "example_batch.csv")
     workflow.export_to_markdown(all_scripts, "example_batch.md")
@@ -132,24 +127,24 @@ def example_single_script():
     print(f"{'GENERATED SCRIPT'.center(80)}")
     print("─" * 80)
     
-    print(f"\n📌 Hook:\n   {script.get('hook', 'N/A')}\n")
-    print(f"⚠️  Problem:\n   {script.get('problem_statement', 'N/A')}\n")
-    print(f"✨ Solution:\n   {script.get('solution', 'N/A')}\n")
-    print(f"🎯 CTA:\n   {script.get('cta', 'N/A')}\n")
-    print(f"🎞️  Full Script:\n")
+    print(f"\n Hook:\n   {script.get('hook', 'N/A')}\n")
+    print(f"  Problem:\n   {script.get('problem_statement', 'N/A')}\n")
+    print(f" Solution:\n   {script.get('solution', 'N/A')}\n")
+    print(f" CTA:\n   {script.get('cta', 'N/A')}\n")
+    print(f"  Full Script:\n")
     
     script_text = script.get('full_script', 'N/A')
     for line in script_text.split('\n'):
         print(f"   {line}")
     
-    print(f"\n📱 Platform: {script.get('platform', 'N/A')}")
-    print(f"⏱️  Duration: {script.get('estimated_duration', 'N/A')}")
+    print(f"\n Platform: {script.get('platform', 'N/A')}")
+    print(f"  Duration: {script.get('estimated_duration', 'N/A')}")
 
 
 def show_menu():
     """Display menu of examples"""
     print("\n" + "=" * 80)
-    print("🚀 AD SCRIPT GENERATOR - EXAMPLE USAGE MENU".center(80))
+    print(" AD SCRIPT GENERATOR - EXAMPLE USAGE MENU".center(80))
     print("=" * 80)
     print("""
 1. Basic Usage - Generate scripts for one topic (Skincare)
@@ -188,23 +183,23 @@ def main():
                 input("\nPress Enter to continue...")
             
             elif choice == '5':
-                print("\n👋 Goodbye!")
+                print("\n Goodbye!")
                 sys.exit(0)
             
             else:
-                print("\n❌ Invalid choice. Please try again.")
+                print("\n Invalid choice. Please try again.")
     
     except KeyboardInterrupt:
-        print("\n\n👋 Interrupted by user. Goodbye!")
+        print("\n\n Interrupted by user. Goodbye!")
         sys.exit(0)
     
     except ImportError as e:
-        print(f"\n❌ Import Error: {e}")
+        print(f"\n Import Error: {e}")
         print("\nMake sure you have installed all dependencies:")
         print("  pip install -r requirements.txt")
     
     except Exception as e:
-        print(f"\n❌ Error: {e}")
+        print(f"\n Error: {e}")
         print("\nMake sure you have:")
         print("  1. Set ANTHROPIC_API_KEY in .env file")
         print("  2. Installed all requirements: pip install -r requirements.txt")
