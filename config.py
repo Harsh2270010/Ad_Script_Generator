@@ -10,7 +10,7 @@ class Config:
     @classmethod
     def validate(cls):
         if not cls.GROQ_API_KEY:
-            print("❌ GROQ_API_KEY not set")
+            print(" GROQ_API_KEY not set")
             return False
-        print("✅ GROQ API Key Loaded")
+        print(" GROQ API Key Loaded")
         return True
