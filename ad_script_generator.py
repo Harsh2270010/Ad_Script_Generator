@@ -1,7 +1,3 @@
-"""
-AI Ad Script Generator + Google Sheets Integration (FINAL)
-"""
-
 import json
 import os
 from datetime import datetime
@@ -21,25 +17,25 @@ class AdScriptGenerator:
 
     def __init__(self, google_sheet_id: Optional[str] = None):
 
-        # ✅ Load API Key
+        
         self.api_key = os.getenv("GROQ_API_KEY")
         if not self.api_key:
-            raise ValueError("❌ GROQ_API_KEY not found in .env")
+            raise ValueError(" GROQ_API_KEY not found in .env")
 
-        # ✅ Load Model
+        # Load Model
         self.model = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
 
-        # ✅ Initialize Groq
+        # Initialize Groq
         self.client = Groq(api_key=self.api_key)
 
-        # ✅ Google Sheets setup
+        # Google Sheets setup
         self.google_sheet_id = google_sheet_id
         self.sheets_client = None
 
         if google_sheet_id:
             self.init_google_sheets()
 
-    # ---------------- GOOGLE SHEETS ---------------- #
+    # GOOGLE SHEETS 
 
     def init_google_sheets(self):
         try:
@@ -49,10 +45,10 @@ class AdScriptGenerator:
             )
 
             self.sheets_client = build("sheets", "v4", credentials=credentials)
-            print("✅ Google Sheets Connected")
+            print(" Google Sheets Connected")
 
         except Exception as e:
-            print(f"❌ Google Sheets Error: {e}")
+            print(f" Google Sheets Error: {e}")
 
     def save_to_google_sheets(self, scripts):
 
@@ -90,12 +86,12 @@ class AdScriptGenerator:
                 body=body
             ).execute()
 
-            print("✅ Data saved to Google Sheets")
+            print(" Data saved to Google Sheets")
 
         except Exception as e:
-            print(f"❌ Error saving to sheets: {e}")
+            print(f" Error saving to sheets: {e}")
 
-    # ---------------- CORE LOGIC ---------------- #
+    # CORE LOGIC 
 
     def get_viral_hooks(self, topic: str):
         trending_hooks_db = {
@@ -150,7 +146,7 @@ Generate a high-converting 15-20 second ad script.
             response_text = completion.choices[0].message.content
 
         except Exception as e:
-            print(f"❌ API Error: {e}")
+            print(f" API Error: {e}")
             return {"error": str(e)}
 
         try:
@@ -164,7 +160,7 @@ Generate a high-converting 15-20 second ad script.
 
     def create_workflow(self, topic: str, num_scripts: int = 3):
 
-        print(f"\n🚀 Starting Workflow for: {topic}")
+        print(f"\n Starting Workflow for: {topic}")
 
         hooks = self.get_viral_hooks(topic)[:num_scripts]
         scripts = []
@@ -185,18 +181,18 @@ Generate a high-converting 15-20 second ad script.
         return scripts
 
 
-# ---------------- MAIN ---------------- #
+# MAIN 
 
 def main():
 
-    # 🔥 PUT YOUR GOOGLE SHEET ID HERE
+    # PUT YOUR GOOGLE SHEET ID HERE
     GOOGLE_SHEET_ID = "1vFd57steELygi3bHs7KLzGaw4k0z4DxgJMwcuLU52QE"
 
     generator = AdScriptGenerator(google_sheet_id=GOOGLE_SHEET_ID)
 
     scripts = generator.create_workflow("Skincare", 3)
 
-    # ✅ Save to Google Sheets
+    # Save to Google Sheets
     generator.save_to_google_sheets(scripts)
 
     print("\n========== GENERATED SCRIPTS ==========\n")
